@@ -1,13 +1,8 @@
 services:
-  ecommerce-db:
-    image: mysql
-    container_name: ecommerce-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-
   discovery-server:
     image: discovery-server
+    build:
+      context: ./discovery-server
     container_name: discovery-server
     pull_policy: always
     ports:
@@ -15,27 +10,39 @@ services:
 
   api-gateway:
     image: api-gateway
+    build:
+      context: ./api-gateway
     container_name: api-gateway
     pull_policy: always
     ports:
-      - "8180:8080"
+      - "8081:8080"
     expose:
-      - "8180"
+      - "8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - discovery-server
 
   product-service:
     container_name: product-service
+    build:
+      context: ./product-service
     image: product-service
     pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - discovery-server
       - api-gateway
 
   order-service:
     container_name: order-service
+    build:
+      context: ./order-service
     image: order-service
     pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - discovery-server
       - api-gateway

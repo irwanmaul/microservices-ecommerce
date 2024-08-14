@@ -7,6 +7,7 @@ import com.irwan.bvk.dto.CreateOrderRequest;
 import com.irwan.bvk.dto.CreateOrderResponse;
 import com.irwan.bvk.dto.OrderDetailDto;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Slf4j
+@Disabled("Need product-service started before running this test")
 class OrderControllerTest {
 
     @Autowired
@@ -32,6 +34,7 @@ class OrderControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+
     void placeOrder() throws Exception {
         CreateOrderRequest request = CreateOrderRequest.builder()
                 .orderDetails(

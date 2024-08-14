@@ -2,6 +2,7 @@ package com.irwan.bvk.product.controller;
 
 import com.irwan.bvk.product.dto.ApiResponse;
 import com.irwan.bvk.product.dto.RegisterProductRequest;
+import com.irwan.bvk.product.dto.RegisterProductResponse;
 import com.irwan.bvk.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,9 @@ public class ProductController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<String> register(@RequestBody RegisterProductRequest request) {
-        productService.createProduct(request);
+    public ApiResponse<RegisterProductResponse> register(@RequestBody RegisterProductRequest request) {
+        RegisterProductResponse registerProductResponse = productService.createProduct(request);
 
-        return ApiResponse.<String>builder().data("OK").build();
+        return ApiResponse.<RegisterProductResponse>builder().data(registerProductResponse).build();
     }
 }

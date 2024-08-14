@@ -17,6 +17,9 @@
             </properties>
         </profile>
     </profiles>
+    <properties>
+        <start-class>com.irwan.bvk.discovery.DiscoveryServerApplication</start-class>
+    </properties>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -24,4 +27,23 @@
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.irwan.bvk.discovery.DiscoveryServerApplication</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.irwan.bvk.product.dto.ApiResponse;
 import com.irwan.bvk.product.dto.RegisterProductRequest;
+import com.irwan.bvk.product.dto.RegisterProductResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +61,10 @@ class ProductControllerTest {
         ).andExpectAll(
                 status().isCreated()
         ).andDo(result -> {
-            ApiResponse<String> apiResponse = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
+            ApiResponse<RegisterProductResponse> apiResponse = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
             });
             log.info(apiResponse.toString());
-            assertEquals("OK", apiResponse.getData());
+            assertNotNull(apiResponse.getData());
         });
     }
 
@@ -82,7 +83,7 @@ class ProductControllerTest {
         ).andExpectAll(
                 status().isBadRequest()
         ).andDo(result -> {
-            ApiResponse<String> apiResponse = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
+            ApiResponse<RegisterProductResponse> apiResponse = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
             });
             log.info(apiResponse.toString());
             assertEquals("Product Name Already Registered", apiResponse.getErrors());

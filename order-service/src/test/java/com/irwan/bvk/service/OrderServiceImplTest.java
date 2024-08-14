@@ -114,13 +114,11 @@ class OrderServiceImplTest {
         when(entity.getStatusCode()).thenReturn(HttpStatus.OK);
         Order order = Order.builder()
                 .orderDate(new Timestamp(new Date().getTime()))
-                .status("BOOKED")
                 .amount(createOrderRequest.getOrderDetails().stream().mapToDouble(OrderDetailDto::getPrice).sum())
                 .build();
 
-        Order savedOrder = order;
-        savedOrder.setId(1);
-        when(orderRepository.save(order)).thenReturn(savedOrder);
+        order.setId(1);
+        when(orderRepository.save(order)).thenReturn(order);
         when(bodilessEntity.getStatusCode()).thenReturn(HttpStatus.OK);
 
         log.info("restClient {}", restClient);
