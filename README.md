@@ -7,6 +7,10 @@
 3. Run `docker compose up -d` to start the applications.
 
 # API Documentation
+**Discovery Service : http://localhost:8081/eureka/web**
+
+**Health : http://localhost:8081/actuator/health**
+
 **Base URL : http://localhost:8081**
 
 **1. Create Product**
