@@ -23,4 +23,10 @@ public class ErrorController {
                 .body(ApiResponse.<String>builder().errors(exception.getReason()).build());
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ApiResponse<String>> illegalStateException(IllegalStateException exception) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(ApiResponse.<String>builder().errors("internal service unavailable").build());
+    }
+
 }
