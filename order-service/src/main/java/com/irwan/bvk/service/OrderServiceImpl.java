@@ -80,6 +80,7 @@ public class OrderServiceImpl implements OrderService{
             orderDetailModel.setOrder(order);
             InventoryDetailResponse detailResponse = invMap.get(details.getProductId());
             orderDetailModel.setProductName(detailResponse.getProductName());
+            orderDetailModel.setProductId(detailResponse.getProductId());
 
             orderDetails.add(orderDetailModel);
         }

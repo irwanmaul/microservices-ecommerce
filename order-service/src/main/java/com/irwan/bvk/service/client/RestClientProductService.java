@@ -61,7 +61,7 @@ public class RestClientProductService {
                 .stream()
                 .map(o -> UpdateInventoryRequest.builder()
                         .stockChange(-o.getQuantity())
-                        .productId(o.getId())
+                        .productId(o.getProductId())
                         .build()
                 ).toList();
 

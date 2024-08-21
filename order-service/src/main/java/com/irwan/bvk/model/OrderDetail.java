@@ -16,7 +16,7 @@ public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+    private Integer productId;
     private String productName;
     private int quantity;
     private double price;
